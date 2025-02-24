@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 connect();
 
-export async function POST(req:NextRequest) {
+export async function POST(req: NextRequest) {
     try {
         const { email, password } = await req.json();
 
@@ -29,10 +29,8 @@ export async function POST(req:NextRequest) {
         return userResponse;
 
 
-    } catch (error: any) {
-        console.log(error);
-        
-        return NextResponse.json({ status: "error", message: error.message, statusCode: 500 });
+    } catch {
+        return NextResponse.json({ status: "error", message: "Login error", statusCode: 500 });
     }
 
 };

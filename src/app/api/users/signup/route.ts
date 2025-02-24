@@ -20,10 +20,9 @@ export async function POST(request: NextRequest) {
         });
         const saveUser = await newUser.save();
         console.log(saveUser);
-        const msg = await sendMail({ email, emailType: "VERIFY", userId: saveUser._id });
-        console.log(msg);
+        await sendMail({ email, emailType: "VERIFY", userId: saveUser._id });
         return NextResponse.json({ message: "User created successfully", success: true, saveUser }, { status: 201 });
-    } catch (error: any) {
-        return NextResponse.json({ message: error.message }, { status: 500 });
+    } catch {
+        return NextResponse.json({ message: "signup error" }, { status: 500 });
     }
 }

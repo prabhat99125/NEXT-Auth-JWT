@@ -1,9 +1,14 @@
 import user from "@/models/userModel";
 import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer"
 
-const nodemailer = require("nodemailer");
+interface MailDetails {
+    email: string;
+    emailType: string;
+    userId: string;
+  }
 
-export const sendMail = async ({ email, emailType, userId }: any) => {
+export const sendMail = async ({ email, emailType, userId }:MailDetails) => {
 
     try {
         const hashToken = await bcrypt.hash(userId.toString(), 10); // Added await here
@@ -24,7 +29,7 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
             })
 
         }
-        var transport = nodemailer.createTransport({
+        const transport = nodemailer.createTransport({
             service: "gmail",
             secure: true,
             port: 465,
@@ -47,10 +52,7 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
 
         return mailRespons;
 
-    } catch (e: any) {
-        console.log(e);
+    } catch {
         console.log("email not send");
-
-        throw new Error(e.message);
     }
 };

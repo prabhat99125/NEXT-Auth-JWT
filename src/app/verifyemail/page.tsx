@@ -1,6 +1,5 @@
 "use client"
 import axios from "axios";
-import { error } from "console";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -20,7 +19,7 @@ export default function Home() {
       setLoading(false);
       setError(false);
       router.push("/login");
-    } catch (error) {
+    } catch {
       setLoading(false);
       setVerified(false);
       setError(true);

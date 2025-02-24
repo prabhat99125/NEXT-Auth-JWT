@@ -27,7 +27,7 @@ export default function Home() {
       router.push("/login");
       setButtonDisabled(false);
 
-    } catch (error) {
+    } catch {
       console.log("singup failed");
       toast.error("singup failed");
       setLoading(false);
